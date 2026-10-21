@@ -1,4 +1,11 @@
 {
+	// 配置 easycom 后，可直接在模板中使用 t-xxx 组件，无需手动 import
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"^t-(.*)": "@tdesign/uniapp/$1/$1.vue"
+		}
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
