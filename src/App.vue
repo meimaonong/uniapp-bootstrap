@@ -1,7 +1,9 @@
 <script>
+import { useThemeStore } from '@/stores/theme'
+
 export default {
   onLaunch: function () {
-    console.log('App Launch')
+    useThemeStore().init()
   },
   onShow: function () {
     console.log('App Show')
@@ -14,4 +16,9 @@ export default {
 
 <style>
 /*每个页面公共css */
+/* #ifdef H5 */
+body {
+  background-color: var(--td-bg-color-page, #f5f5f5);
+}
+/* #endif */
 </style>

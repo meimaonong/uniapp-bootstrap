@@ -54,7 +54,11 @@
         "setting" : {
             "urlCheck" : false
         },
-        "usingComponents" : true
+        "usingComponents" : true,
+        /* 开启后可获取系统主题(getSystemInfoSync().theme)并监听 onThemeChange */
+        "darkmode" : true,
+        /* 原生导航栏 / 窗口背景随系统主题切换，避免首帧闪白 */
+        "themeLocation" : "theme.json"
     },
     "mp-alipay" : {
         "usingComponents" : true

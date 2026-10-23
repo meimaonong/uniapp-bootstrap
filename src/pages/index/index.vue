@@ -1,5 +1,5 @@
 <template>
-  <view class="page">
+  <view class="page" :class="{ 'theme-dark': theme === 'dark' }">
     <view class="header">
       <image class="logo" src="/static/logo.png" />
       <text class="title">{{ title }}</text>
@@ -38,21 +38,47 @@
       </t-cell-group>
     </view>
 
+    <view class="section">
+      <view class="section-title">主题 Theme</view>
+      <t-segmented block :options="themeOptions" :value="mode" @change="onModeChange" />
+    </view>
+
     <t-toast id="t-toast" ref="t-toast" />
   </view>
 </template>
 
 <script>
 import { Toast } from '@tdesign/uniapp'
+import { useThemeStore } from '@/stores/theme'
 
 export default {
   data() {
     return {
       title: 'Hello',
       switchValue: true,
+      themeOptions: [
+        { label: '跟随系统', value: 'system' },
+        { label: '浅色', value: 'light' },
+        { label: '深色', value: 'dark' },
+      ],
     }
   },
+  computed: {
+    theme() {
+      return useThemeStore().theme
+    },
+    mode() {
+      return useThemeStore().mode
+    },
+  },
+  onReady() {
+    // 导航栏颜色是页面级的，进入页面后补一次
+    useThemeStore().apply()
+  },
   methods: {
+    onModeChange(e) {
+      useThemeStore().setMode(e.value)
+    },
     onSwitchChange(e) {
       this.switchValue = e.value
     },
